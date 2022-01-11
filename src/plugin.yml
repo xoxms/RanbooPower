@@ -1,0 +1,12 @@
+name: RanbooPower
+version: 1.0.0
+main: com.papajittan.ranboopower.Main
+api-version: 1.18
+author: Papajittan
+commands:
+  ranbooadd:
+    description: Add the player Ranboo power!
+    usage: /ranbooadd <player name>
+  ranbooremove:
+    description: Remove the Ranboo power from player!
+    usage: /ranbooremove <player name>
