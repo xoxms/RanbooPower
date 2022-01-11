@@ -9,4 +9,5 @@ You can have silktouch hand like Ranboo and it's little illegal!
 #### /ranbooadd <player name> to add the power!
 #### /ranbooremove <player name> to remove the power!
 
-## Download the plugin (lastest version) [here](https://cdn.discordapp.com/attachments/855714615244357663/930450480088367144/RanbooPower.jar)
+## Where can I download it?
+Download the plugin (lastest version) [here](https://cdn.discordapp.com/attachments/855714615244357663/930450480088367144/RanbooPower.jar)
