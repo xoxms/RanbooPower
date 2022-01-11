@@ -6,5 +6,5 @@ You can have silktouch hand like Ranboo and it's little illegal!
 
 ## How to use it?
 
-### /ranbooadd <player name> to add the power!
-### /ranbooremove <player name> to remove the power!
+# /ranbooadd <player name> to add the power!
+# /ranbooremove <player name> to remove the power!
