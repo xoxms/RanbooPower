@@ -1,4 +1,4 @@
-package com.papajittan.ranboopower;
+package com.august.pvpmanager;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -6,37 +6,36 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import java.io.File;
 
 public class PluginSupporter {
-    public static void SetRanboo(String name, String yesorno){
-        File file = new File(Main.instance.getDataFolder() + File.separator + name + ".yml");
-        if (!file.exists()) {
+    protected static void setPvP(String playername, boolean bool){
+        File var10002 = Main.instance.getDataFolder();
+        File f = new File(var10002 + File.separator + playername + ".yml");
+        if (!f.exists()) {
             try {
-                file.createNewFile();
-            } catch (Exception exception) {
-                Bukkit.getServer().getConsoleSender().sendMessage(exception.getMessage());
+                f.createNewFile();
+            } catch (Exception e) {
+                Bukkit.getServer().getConsoleSender().sendMessage(e.getMessage());
             }
         }
-        YamlConfiguration yml = new YamlConfiguration();
-        yml.set("Ranboo", yesorno);
-        try {
-            yml.save(file);
-        } catch (Exception exception) {
-            Bukkit.getServer().getConsoleSender().sendMessage(exception.getMessage());
+        YamlConfiguration yamlConfiguration = YamlConfiguration.loadConfiguration(f);
+        yamlConfiguration.set("pvp", bool);
+        try{
+            yamlConfiguration.save(f);
+        }catch (Exception e){
+            Bukkit.getServer().getConsoleSender().sendMessage(e.getMessage());
         }
     }
-    public static RaNbOo GetRanboo(String name){
-        File file = new File(Main.instance.getDataFolder() + File.separator + name + ".yml");
-        if (!file.exists()) {
+    protected static PluginSupporter.Data getPvP(String playername){
+        File var10002 = Main.instance.getDataFolder();
+        File f = new File(var10002 + File.separator + playername + ".yml");
+        if(!f.exists()){
             return null;
         }
-
-        YamlConfiguration yml = YamlConfiguration.loadConfiguration(file);
-        RaNbOo ranboo = new RaNbOo();
-        ranboo.CheckRanboo = yml.getString("Ranboo");
-        return ranboo;
+        YamlConfiguration yml = YamlConfiguration.loadConfiguration(f);
+        PluginSupporter.Data pvp = new PluginSupporter.Data();
+        pvp.PvP = yml.getBoolean("pvp");
+        return pvp;
     }
-
-    public static class RaNbOo {
-        public String CheckRanboo;
+    protected static class Data{
+        protected Boolean PvP;
     }
 }
-
