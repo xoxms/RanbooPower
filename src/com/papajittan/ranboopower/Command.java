@@ -11,53 +11,45 @@ import java.util.Objects;
 public class Command implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender commandSender, org.bukkit.command.Command command, String string, String[] args) {
-        var cmd = command.getName();
-        if(cmd.equalsIgnoreCase("ranbooadd")){
             if(commandSender instanceof Player) {
                 if (!commandSender.isOp()) {
                     commandSender.sendMessage(ChatColor.RED + "You need op to use this command!");
                     return true;
                 }
-            }
             if(args.length <= 0){
-                commandSender.sendMessage(ChatColor.RED + "Please enter player name that you want to add!");
+                commandSender.sendMessage(ChatColor.GOLD + "/ranboo add <player name> to add the player Ranboo power!\n" +
+                        "/ranboo remove <player name> to remove the player Ranboo power!");
                 return true;
             }
-            PluginSupporter.SetRanboo(args[0], "yes");
-            commandSender.sendMessage(ChatColor.GOLD + "Successfully gave " + ChatColor.WHITE + args[0] + ChatColor.GOLD + " the Ranboo power!");
-            Player tplayer = Bukkit.getPlayer(args[0]);
-            if(tplayer == null) return true;
-            tplayer.sendMessage(ChatColor.GOLD + "You have got the Ranboo power!");
-            return true;
-        }
-        if(cmd.equalsIgnoreCase("ranbooremove")){
-            if(commandSender instanceof Player) {
-                if (!commandSender.isOp()) {
-                    commandSender.sendMessage(ChatColor.RED + "You need op to use this command!");
+            if(!PluginSupporter.isAddRemove(args[0])) {
+                commandSender.sendMessage(ChatColor.RED + "Please enter add or remove in args[0]!");
+                return true;
+            }
+            if(args[0].equalsIgnoreCase("add")) {
+                if(Objects.requireNonNull(PluginSupporter.GetRanboo(args[1])).CheckRanboo) {
+                    commandSender.sendMessage(ChatColor.RED + "This player already have Ranboo power!");
                     return true;
                 }
-            }
-            if(args.length <= 0){
-                commandSender.sendMessage(ChatColor.RED + "Please enter player name that you want to remove!");
+                PluginSupporter.SetRanboo(args[1], true);
+                commandSender.sendMessage(ChatColor.GOLD + "Successfully gave " + ChatColor.WHITE + args[0] + ChatColor.GOLD + " the Ranboo power!");
+                Player tplayer = Bukkit.getPlayer(args[1]);
+                if(tplayer == null) return true;
+                tplayer.sendMessage(ChatColor.GOLD + "You have got the Ranboo power!");
                 return true;
             }
-            PluginSupporter.RaNbOo boo = PluginSupporter.GetRanboo(args[0]);
-            if(boo == null){
-                commandSender.sendMessage(ChatColor.RED + "The player don't even have Ranboo power!");
+            if(args[0].equalsIgnoreCase("remove")) {
+                if (!Objects.requireNonNull(PluginSupporter.GetRanboo(args[1])).CheckRanboo) {
+                    commandSender.sendMessage(ChatColor.RED + "The player don't even have Ranboo power!");
+                    return true;
+                }
+                PluginSupporter.SetRanboo(args[1], false);
+                commandSender.sendMessage(ChatColor.GOLD + "Successfully removed " + ChatColor.WHITE + args[0] + ChatColor.GOLD + " the Ranboo power!");
+                Player tplayer = Bukkit.getPlayer(args[0]);
+                if (tplayer == null) return true;
+                tplayer.sendMessage(ChatColor.GOLD + "Your Ranboo power got removed!");
                 return true;
             }
-            String boos = boo.CheckRanboo;
-            if(Objects.equals(boos, "no")){
-                commandSender.sendMessage(ChatColor.RED + "The player don't even have Ranboo power!");
-                return true;
             }
-            PluginSupporter.SetRanboo(args[0], "no");
-            commandSender.sendMessage(ChatColor.GOLD + "Successfully removed " + ChatColor.WHITE + args[0] + ChatColor.GOLD + " the Ranboo power!");
-            Player tplayer = Bukkit.getPlayer(args[0]);
-            if(tplayer == null) return true;
-            tplayer.sendMessage(ChatColor.GOLD + "Your Ranboo power got removed!");
-            return true;
-        }
         return true;
-        }
     }
+}
