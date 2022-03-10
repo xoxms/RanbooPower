@@ -1,5 +1,5 @@
 # RanbooPower
-This plugin will let you manage and give Ranboo power in Dream SMP!
+This Minecraft plugin will let you manage and give Ranboo power in Dream SMP!
 
 ## What can Ranboo power do?
 If you mine any block with your hand it will give you the same type of block you broke!
